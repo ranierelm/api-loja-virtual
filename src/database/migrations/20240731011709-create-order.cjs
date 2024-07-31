@@ -10,7 +10,7 @@ module.exports = {
         primaryKey: true,
       },
       total_value: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
       client_id: {

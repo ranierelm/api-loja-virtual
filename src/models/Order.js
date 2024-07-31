@@ -11,7 +11,7 @@ export default class Order extends Model {
           primaryKey: true,
         },
         total_value: {
-          type: DataTypes.FLOAT,
+          type: DataTypes.DECIMAL(10, 2),
           allowNull: false,
         },
         client_id: {
