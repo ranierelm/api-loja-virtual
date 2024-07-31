@@ -1,5 +1,4 @@
 import { Model, DataTypes } from "sequelize";
-import OrderStatus from "./OrderStatus.js";
 
 export default class Order extends Model {
   static init(sequelize) {
@@ -21,7 +20,7 @@ export default class Order extends Model {
         order_status_id: {
           type: DataTypes.INTEGER,
           references: {
-            model: OrderStatus,
+            model: "order_status",
             key: "id",
           },
         },
@@ -49,6 +48,11 @@ export default class Order extends Model {
         updatedAt: "updated_at",
       }
     );
-    Order.belongsTo(OrderStatus, { foreignKey: "order_status_id" });
+  }
+  static associate(models) {
+    this.belongsTo(models.OrderStatus, {
+      foreignKey: "order_status_id",
+      as: "status",
+    });
   }
 }
