@@ -108,7 +108,7 @@ A aplicação oferece os seguintes endpoints para interagir com a API:
 
 **Exemplo de requisição:**
 ```bash
-curl "http://localhost:3000/search?query=apple&page=1&limit=10"
+curl "http://localhost:3300/search?query=apple&page=1&limit=10"
 ```
 
 ### Create Order
@@ -120,7 +120,7 @@ curl "http://localhost:3000/search?query=apple&page=1&limit=10"
 
 **Exemplo de requisição:**
 ```bash
-curl -X POST "http://localhost:3000/create-order" \
+curl -X POST "http://localhost:3300/create-order" \
 -H "Content-Type: application/json" \
 -d '{
   "clientId": 123,
@@ -138,7 +138,7 @@ curl -X POST "http://localhost:3000/create-order" \
 
 **Exemplo de requisição:**
 ```bash
-curl "http://localhost:3000/"
+curl "http://localhost:3300/"
 ```
 
 ## Testing
