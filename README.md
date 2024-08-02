@@ -12,7 +12,7 @@ Aplicação backend para loja virtual
 Este projeto foi criado como parte de um teste técnico para uma vaga. O Projeto ainda está em fase de finalização.
 
 ## Technical Overview
-A aplicação é construída usando Node.js, com Express como framework de servidor e Sequelize como ORM. O banco de dados utilizado é o PostgreSQL, rodando em um contêiner Docker, assim como o Redis para cache.
+A aplicação é construída usando Node.js, com Express como framework de servidor e Sequelize como ORM. O banco de dados utilizado é o PostgreSQL, rodando em um contêiner Docker, assim como o Bull para processamento de tarefas assíncronas, como filas por exemplo.
 
 ### Sequelize
 Para configurar o banco de dados e o Sequelize, certifique-se de ter o PostgreSQL e o Redis rodando via Docker. Após configurar e iniciar os serviços Docker, você pode executar as migrações do banco de dados usando o seguinte comando:
@@ -36,7 +36,7 @@ Substitua `<container_id>` pelo ID do contêiner do PostgreSQL.
 ## Setup and Run
 Antes de começar, certifique-se de ter os seguintes requisitos instalados em seu sistema:
 
-- [Node.js](https://nodejs.org/) - Versão 14 ou superior
+- [Node.js](https://nodejs.org/) - Versão 18 ou superior
 - [Docker](https://www.docker.com/) - Para rodar o PostgreSQL e Redis
 
 ### Dependencies
@@ -52,7 +52,13 @@ Este comando instalará todas as dependências necessárias listadas no arquivo 
 Crie um arquivo `.env` na raiz do projeto e adicione as variáveis de ambiente necessárias, por exemplo:
 
 ```env
-DB_PASS=your_postgres_password
+NODE_ENV=development
+DB_NAME=db_name
+DB_USER=postgres
+DB_PASS=postgres
+DB_HOST=127.0.0.1
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
 ```
 
 ## Running
@@ -74,10 +80,10 @@ Para saber o id do container utilize o comando:
 docker ps
 ```
 
-Em seguida, execute o servidor Node.js:
+Em seguida, execute o servidor Node.js e Bull com o seguinte comando:
 
 ```bash
-npm start
+npm run dev
 ```
 
 ## Generating Fake Products

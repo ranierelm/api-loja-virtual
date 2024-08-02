@@ -5,17 +5,20 @@ services:
     image: postgres:13
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=$DB_PASS
+      - POSTGRES_PASSWORD=postgrespass
       - POSTGRES_DB=loja_virtual
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    container_name: postgres-marketplace
 
   redis:
     image: redis:alpine
     ports:
       - "6379:6379"
+    container_name: redis-marketplace
+
 
 volumes:
   db_data:

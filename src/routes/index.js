@@ -19,7 +19,7 @@ router.patch(
 );
 
 router.get("/", (req, res) => {
-  res.json({ result: "Yandeh Marketplace API connected!" });
+  res.json({ result: "API connected!" });
 });
 
 export default router;
