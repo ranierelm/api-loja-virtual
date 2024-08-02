@@ -1,7 +1,7 @@
 import Sequelize from "sequelize";
 import dbConfig from "../config/database.js";
 
-import Product from "../models/product.js";
+import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import OrderItem from "../models/OrderItem.js";
 import OrderStatus from "../models/OrderStatus.js";

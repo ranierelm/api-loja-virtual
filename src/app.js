@@ -19,7 +19,7 @@ sequelize
     console.log("Database connected...");
   })
   .catch((error) => {
-    console.log(`Erroror: ${error}`);
+    console.log(`Error: ${error}`);
   });
 
 app.listen(PORT, () => {
