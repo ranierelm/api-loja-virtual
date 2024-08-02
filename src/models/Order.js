@@ -5,7 +5,7 @@ export default class Order extends Model {
     super.init(
       {
         id: {
-          type: DataTypes.UUID,
+          type: DataTypes.INTEGER,
           autoIncrement: true,
           primaryKey: true,
         },
@@ -53,6 +53,10 @@ export default class Order extends Model {
     this.belongsTo(models.OrderStatus, {
       foreignKey: "order_status_id",
       as: "status",
+    });
+    this.hasMany(models.OrderItem, {
+      foreignKey: "order_id",
+      as: "items",
     });
   }
 }
