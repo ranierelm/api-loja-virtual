@@ -9,7 +9,7 @@ export default class OrderService {
     const totalValue = OrderService.calculateTotalValue(products);
     const deliveryDate = OrderService.calculateDeliveryDate();
 
-    const orderStatusId = 5;
+    const orderStatusId = 9; //"Pending"
 
     try {
       const transaction = await Order.sequelize.transaction();
@@ -24,8 +24,21 @@ export default class OrderService {
         { transaction }
       );
 
+      await OrderService.addOrderItems(order.id, products, transaction);
+
+      await transaction.commit();
+
+      return order;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  static async addOrderItems(orderId, products, transaction) {
+    try {
       const orderItems = products.map((product) => ({
-        order_id: order.id,
+        order_id: orderId,
         product_id: product.id,
         quantity: product.quantity,
         unit_price: product.unit_price,
@@ -33,7 +46,20 @@ export default class OrderService {
 
       await OrderItem.bulkCreate(orderItems, { transaction });
 
-      await transaction.commit();
+      return console.log({ message: "Products added to order." });
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  static async updateOrderStatus(orderId, status) {
+    try {
+      const order = await Order.findByPk(orderId);
+      if (!order) throw new Error("Order not found");
+
+      order.order_status_id = status;
+      await order.save();
 
       return order;
     } catch (error) {

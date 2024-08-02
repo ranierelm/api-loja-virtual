@@ -1,4 +1,4 @@
-import Product from "../models/product.js";
+import Product from "../models/Product.js";
 
 import { Op, literal } from "sequelize";
 import removeAccents from "remove-accents";
