@@ -1,4 +1,5 @@
 import OrderService from "../services/OrderService.js";
+import Queue from "../lib/Queue.js";
 
 export default class OrderController {
   static async create(req, res) {
@@ -14,6 +15,8 @@ export default class OrderController {
       }
 
       const order = await OrderService.createOrder(clientId, products);
+
+      await Queue.add("ProcessingOrder", { order });
 
       return res.status(201).json({ order: order });
     } catch (error) {
